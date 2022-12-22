@@ -1,5 +1,4 @@
 use crate::domain::{Date, PostalCode};
-use crate::domain_error::DomainError;
 use crate::domain_form::{DomainForm, DomainFormOpt};
 use crate::input_with_validation_v1::ValidationInputV1;
 use log::info;
@@ -12,7 +11,7 @@ pub fn form_v1() -> Html {
     let onclick = {
         let domain_form_opt_handle = domain_form_opt_handle.clone();
         Callback::from(move |_: MouseEvent| {
-            let res: Result<DomainForm, DomainError> = domain_form_opt_handle
+            let res: Result<DomainForm, _> = domain_form_opt_handle
                 .replace_with(|domain_form_opt| domain_form_opt.clone())
                 .try_into();
             if let Ok(domain_form) = res {
@@ -27,7 +26,7 @@ pub fn form_v1() -> Html {
         <div>
             <label>
                 {"郵便番号を入力"}
-                <ValidationInputV1<PostalCode, DomainError>
+                <ValidationInputV1<PostalCode, _>
                     onchange={
                         let domain_form_opt_handle = domain_form_opt_handle.clone();
                         move |opt|{domain_form_opt_handle.borrow_mut().postal_code = opt;}
@@ -40,7 +39,7 @@ pub fn form_v1() -> Html {
         <div>
             <label>
                 {"年月日を入力"}
-                <ValidationInputV1<Date, DomainError>
+                <ValidationInputV1<Date, _>
                     onchange={
                         let domain_form_opt_handle = domain_form_opt_handle.clone();
                         move |opt|{domain_form_opt_handle.borrow_mut().date = opt;}

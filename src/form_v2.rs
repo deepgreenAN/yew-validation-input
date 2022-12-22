@@ -1,5 +1,4 @@
 use crate::domain::{Date, PostalCode};
-use crate::domain_error::DomainError;
 use crate::domain_form::{DomainForm, DomainFormOpt};
 use crate::input_with_validation_v2::ValidationInputV2;
 
@@ -28,7 +27,7 @@ pub fn form_v2() -> Html {
         <>
         <div>
             <label>{"郵便番号を入力"}
-                <ValidationInputV2<PostalCode, DomainError>
+                <ValidationInputV2<PostalCode, _>
                     onsubmit={
                         let domain_form_opt_handle = domain_form_opt_handle.clone();
                         move |opt|{
@@ -44,7 +43,7 @@ pub fn form_v2() -> Html {
         </div>
         <div>
             <label>{"年月日を入力"}
-                <ValidationInputV2<Date, DomainError>
+                <ValidationInputV2<Date, _>
                     onsubmit={
                         let domain_form_opt_handle = domain_form_opt_handle.clone();
                         move |opt|{
