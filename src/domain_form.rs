@@ -1,7 +1,7 @@
 use crate::domain::{Date, PostalCode};
 use crate::domain_error::DomainError;
 
-#[derive(Default, Clone, PartialEq, Eq)]
+#[derive(Default, Clone)]
 pub struct DomainFormOpt {
     pub date: Option<Date>,
     pub postal_code: Option<PostalCode>,
